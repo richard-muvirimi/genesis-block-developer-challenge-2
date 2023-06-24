@@ -30,9 +30,15 @@
                             "resources/src/assets"
                         ],
                         "styles": [
+                            "vendor/bootstrapdash/skydash-free-bootstrap-admin-template/template/vendors/feather/feather.css",
+                            "vendor/bootstrapdash/skydash-free-bootstrap-admin-template/template/vendors/ti-icons/css/themify-icons.css",
+                            "vendor/bootstrapdash/skydash-free-bootstrap-admin-template/template/vendors/css/vendor.bundle.base.css",
+                            "vendor/bootstrapdash/skydash-free-bootstrap-admin-template/template/css/vertical-layout-light/style.css",
                             "resources/src/styles.scss"
                         ],
-                        "scripts": []
+                        "scripts": [
+                            "vendor/bootstrapdash/skydash-free-bootstrap-admin-template/template/vendors/js/vendor.bundle.base.js"
+                        ]
                     },
                     "configurations": {
                         "production": {
@@ -40,8 +46,8 @@
                             "budgets": [
                                 {
                                     "type": "initial",
-                                    "maximumWarning": "500kb",
-                                    "maximumError": "1mb"
+                                    "maximumWarning": "2mb",
+                                    "maximumError": "5mb"
                                 },
                                 {
                                     "type": "anyComponentStyle",

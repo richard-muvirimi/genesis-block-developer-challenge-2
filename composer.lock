@@ -4,8 +4,18 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aa322c53454393ed775cfe4807d54a50",
+    "content-hash": "a6cf72266476a1822a5b3bdc725216d8",
     "packages": [
+        {
+            "name": "bootstrapdash/skydash-free-bootstrap-admin-template",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bootstrapdash/skydash-free-bootstrap-admin-template",
+                "reference": "main"
+            },
+            "type": "library"
+        },
         {
             "name": "brick/math",
             "version": "0.11.0",
