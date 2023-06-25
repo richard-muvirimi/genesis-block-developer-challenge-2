@@ -26,6 +26,6 @@ class Viewify extends Command
      */
     public function handle()
     {
-        Storage::copy('public/build/index.blade.php', 'resources/views/index.blade.php');
+        @copy(public_path('build/index.blade.php'), resource_path('views/index.blade.php'));
     }
 }

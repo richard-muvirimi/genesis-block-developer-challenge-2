@@ -27,13 +27,14 @@
                         "inlineStyleLanguage": "scss",
                         "assets": [
                             "resources/src/favicon.ico",
-                            "resources/src/assets"
+                            "resources/src/app/assets"
                         ],
                         "styles": [
                             "vendor/bootstrapdash/skydash-free-bootstrap-admin-template/template/vendors/feather/feather.css",
                             "vendor/bootstrapdash/skydash-free-bootstrap-admin-template/template/vendors/ti-icons/css/themify-icons.css",
                             "vendor/bootstrapdash/skydash-free-bootstrap-admin-template/template/vendors/css/vendor.bundle.base.css",
                             "vendor/bootstrapdash/skydash-free-bootstrap-admin-template/template/css/vertical-layout-light/style.css",
+                            "vendor/bootstrapdash/skydash-free-bootstrap-admin-template/template/vendors/mdi/css/materialdesignicons.min.css",
                             "resources/src/styles.scss"
                         ],
                         "scripts": [
@@ -42,7 +43,7 @@
                     },
                     "configurations": {
                         "production": {
-                            "baseHref": "./build/",
+                            "deployUrl": "./build/",
                             "budgets": [
                                 {
                                     "type": "initial",
@@ -58,7 +59,7 @@
                             "outputHashing": "all"
                         },
                         "development": {
-                            "baseHref": "./build/",
+                            "deployUrl": "./build/",
                             "buildOptimizer": false,
                             "optimization": false,
                             "vendorChunk": true,

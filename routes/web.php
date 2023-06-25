@@ -14,10 +14,10 @@ use App\Http\Controllers\Controller;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
-
 Route::get('/documentation', function () {
     return view('documentation');
+});
+
+Route::fallback(function () {
+    return view('index');
 });
