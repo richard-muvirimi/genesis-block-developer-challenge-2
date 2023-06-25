@@ -51,7 +51,7 @@ class UserController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'User Created Successfully',
-                'token' => $user->createToken(config('app.key'))->plainTextToken
+                'data' => $user->createToken(config('app.key'))->plainTextToken
             ], 200);
         } catch (Exception $e) {
             return response()->json([

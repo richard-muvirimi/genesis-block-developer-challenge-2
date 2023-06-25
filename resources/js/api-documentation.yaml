@@ -1,0 +1,568 @@
+openapi: 3.0.0
+info:
+  title: Genesi Block API Documentation
+  description: Documentation for the Genesis developer challenge
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000/api
+    description: local server
+  - url: https://tyganeutronics.com/genesis-block-developer-challenge-2/api
+    description: production server
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Todo:
+      properties:
+        id:
+          type: number
+        user_id:
+          type: number
+        title:
+          type: string
+        memo:
+          type: string
+        completed_at:
+          type: string
+        remind_at:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+    User:
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+        email_verified_at:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        todo:
+          type: array
+          items:
+            $ref: '#/components/schemas/Todo'
+paths:
+  /login:
+    post:
+      tags:
+        - Authentication
+      summary: Generates authentication token.
+      description: Allows one to generate an authentication token that can be used on subsequent requests.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - email
+                - password
+      responses:
+        "200":
+          description: An object with the request status and the generated token.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  data:
+                    type: string
+  /account:
+    get:
+      tags:
+        - Authentication
+      summary: Get Account Details.
+      description: Get currently logged in account details.
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: An object with the request status and the user object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/User'
+  /register:
+    post:
+      tags:
+        - Authentication
+      summary: Create a new account.
+      description: Allows one to a new account, in the system
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - name
+                - email
+                - password
+      responses:
+        "200":
+          description: An object with the request status and the generated token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: string
+  /revoke/tokens:
+    get:
+      tags:
+        - Authentication
+      summary: Revokes authentication tokens.
+      description: Revokes all auntentication tokens associated with the login account.
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: An object with the request status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    
+  /todo:
+    get:
+      tags:
+        - Todo
+      summary: Get Todos.
+      description: Get todos associated with the currently logged in account
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: An object with the request status and the list of todos
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Todo'
+    post:
+      tags:
+        - Todo
+      summary: Create a new todo.
+      description: Create a new todo for the logged in user.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                memo:
+                  type: string
+                remind_at:
+                  type: string
+                completed_at:
+                  type: string
+              required:
+                - title
+      responses:
+        "200":
+          description: An object with the request status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+  /todo/{todo}:
+    get:
+      tags:
+        - Todo
+      summary: Get a single todo.
+      description: Get a single todo with matching id.
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: todo
+          description: Todo ID.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: An object with the request status and the todo item
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/Todo'
+    put:
+      tags:
+        - Todo
+      summary: Update a Todo Item.
+      description: Update an existing todo item.
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: todo
+          description: Todo ID.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                memo:
+                  type: string
+                remind_at:
+                  type: string
+                completed_at:
+                  type: string
+              required:
+                - title
+      responses:
+        "200":
+          description: An object with the request status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+    patch:
+      tags:
+        - Todo
+      summary: Update a Todo Item.
+      description: Update an existing todo item.
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: todo
+          description: Todo ID.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                memo:
+                  type: string
+                remind_at:
+                  type: string
+                completed_at:
+                  type: string
+              required:
+                - title
+      responses:
+        "200":
+          description: An object with the request status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+    delete:
+      tags:
+        - Todo
+      summary: Deletes Todo Item.
+      description: Deletes a single Todo Item.
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: todo
+          description: Todo ID.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: An object with the request status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                    
+  /user:
+    get:
+      tags:
+        - User
+      summary: Get All Users.
+      description: Get all users, requires admin role
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: An object with the request status and the list of users
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Todo'
+    post:
+      tags:
+        - User
+      summary: Create a new user.
+      description: Create a new user for the logged in user.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                role:
+                  type: string
+              required:
+                - title
+                - email
+                - password
+      responses:
+        "200":
+          description: An object with the request status and the generated token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: string
+  /user/{user}:
+    get:
+      tags:
+        - User
+      summary: Get a single user.
+      description: Get a single user with matching id.
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: user
+          description: User ID.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: An object with the request status and the user item
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/Todo'
+    put:
+      tags:
+        - User
+      summary: Update a User Item.
+      description: Update an existing user item.
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: user
+          description: User ID.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                role:
+                  type: string
+              required:
+                - title
+                - email
+                - password
+      responses:
+        "200":
+          description: An object with the request status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+    patch:
+      tags:
+        - User
+      summary: Update a User Item.
+      description: Update an existing user item.
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: user
+          description: User ID.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                role:
+                  type: string
+              required:
+                - title
+                - email
+                - password
+      responses:
+        "200":
+          description: An object with the request status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+    delete:
+      tags:
+        - User
+      summary: Deletes User Item.
+      description: Deletes a single User Item.
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: user
+          description: User ID.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: An object with the request status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+ 

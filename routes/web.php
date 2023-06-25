@@ -17,3 +17,7 @@ use App\Http\Controllers\Controller;
 Route::get('/', function () {
     return view('index');
 });
+
+Route::get('/documentation', function () {
+    return view('documentation');
+});
