@@ -10,6 +10,7 @@ use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use LasseRafn\InitialAvatarGenerator\InitialAvatar;
 
 class Controller extends BaseController
 {

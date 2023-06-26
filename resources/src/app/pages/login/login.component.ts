@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from 'app/@types/user';
 import { AuthService } from 'app/services/auth.service';
 import { Subscription } from 'rxjs';
 
@@ -36,13 +37,12 @@ export class LoginComponent implements OnInit {
     onLogin(event: Event): void {
 
         const subscription: Subscription = this.authService.doLogin(this.user).subscribe({
-            next: (res: { status: boolean, data: string }): void => {
-                this.authService.authToken = res.data;
+            next: (res: { status: boolean, data: User }): void => {
 
                 this.router.navigate(['/dashboard']);
             },
             error: (error: Error): void => {
-                alert(error.message);
+                // Handled by interceptor
             },
             complete: (): void => {
                 subscription.unsubscribe();

@@ -1,2 +1,22 @@
-<p>admin-panel works!</p>
-<router-outlet></router-outlet>
+<div class="container-scroller">
+
+    <app-navbar></app-navbar>
+
+    <div class="container-fluid page-body-wrapper">
+
+        <app-settings-panel></app-settings-panel>
+
+        <app-sidebar></app-sidebar>
+
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <router-outlet></router-outlet>
+            </div>
+            <!-- content-wrapper ends -->
+            <app-footer></app-footer>
+        </div>
+        <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+</div>
+<!-- container-scroller -->

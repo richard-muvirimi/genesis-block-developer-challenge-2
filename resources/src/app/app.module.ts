@@ -11,7 +11,13 @@ import { LandingComponent } from './pages/landing/landing.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminPanelComponent } from './pages/admin-panel/admin-panel.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { NavbarComponent } from './partials/navbar/navbar.component';
+import { FooterComponent } from './partials/footer/footer.component';
+import { SidebarComponent } from './partials/sidebar/sidebar.component';
+import { SettingsPanelComponent } from './partials/settings-panel/settings-panel.component';
+import { AttachTokenInterceptor } from './interceptors/attach-token.interceptor';
+import { RequestErrorInterceptor } from './interceptors/request-error.interceptor';
 
 @NgModule({
     declarations: [
@@ -22,6 +28,10 @@ import { HttpClientModule } from '@angular/common/http';
         RegisterComponent,
         LandingComponent,
         AdminPanelComponent,
+        NavbarComponent,
+        FooterComponent,
+        SidebarComponent,
+        SettingsPanelComponent,
     ],
     imports: [
         CommonModule,
@@ -31,7 +41,18 @@ import { HttpClientModule } from '@angular/common/http';
         BrowserModule,
         AppRoutingModule
     ],
-    providers: [],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AttachTokenInterceptor,
+            multi: true,
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: RequestErrorInterceptor,
+            multi: true,
+        },
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
