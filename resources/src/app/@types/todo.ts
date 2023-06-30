@@ -8,3 +8,14 @@ export interface Todo {
     created_at: string,
     updated_at: string
 }
+
+export interface TodoResponse {
+    status: boolean,
+    data: Todo
+}
+
+export interface TodosResponse {
+    status: boolean,
+    data: Todo[]
+}
+

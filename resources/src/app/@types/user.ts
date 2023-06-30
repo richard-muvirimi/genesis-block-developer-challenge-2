@@ -1,4 +1,4 @@
-import { Todo } from "./todo"
+import {Todo} from "./todo"
 
 export interface User {
     id: number,
@@ -10,3 +10,14 @@ export interface User {
     updated_at: string,
     todo?: Todo[]
 }
+
+export interface UserResponse {
+    status: boolean,
+    data: User
+}
+
+export interface UsersResponse {
+    status: boolean,
+    data: User[]
+}
+
