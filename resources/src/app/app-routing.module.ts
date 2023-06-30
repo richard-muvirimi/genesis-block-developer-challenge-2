@@ -7,6 +7,13 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { LandingComponent } from './pages/landing/landing.component';
 import { AdminPanelComponent } from './pages/admin-panel/admin-panel.component';
+import { TodosComponent } from './pages/todos/todos.component';
+import { TodoCreateComponent } from './pages/todo-create/todo-create.component';
+import { TodoComponent } from './pages/todo/todo.component';
+import { UsersComponent } from './pages/users/users.component';
+import { UserCreateComponent } from './pages/user-create/user-create.component';
+import { UserComponent } from './pages/user/user.component';
+import { AccountComponent } from './pages/account/account.component';
 
 const routes: Routes = [
     {
@@ -47,6 +54,41 @@ const routes: Routes = [
                 path: "dashboard",
                 title: "Dashboard",
                 component: DashboardComponent
+            },
+            {
+                path: "todos",
+                title: "Todos",
+                component: TodosComponent
+            },
+            {
+                path: "todos/create",
+                title: "create Todo",
+                component: TodoCreateComponent
+            },
+            {
+                path: "todo/:id",
+                title: "Todo",
+                component: TodoComponent
+            },
+            {
+                path: "users",
+                title: "Users",
+                component: UsersComponent
+            },
+            {
+                path: "users/create",
+                title: "Create User",
+                component: UserCreateComponent
+            },
+            {
+                path: "user/:id",
+                title: "User",
+                component: UserComponent
+            },
+            {
+                path: "account",
+                title: "Account",
+                component: AccountComponent
             },
         ]
     },

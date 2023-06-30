@@ -8,16 +8,22 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { LandingComponent } from './pages/landing/landing.component';
-import { CommonModule } from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminPanelComponent } from './pages/admin-panel/admin-panel.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './partials/navbar/navbar.component';
 import { FooterComponent } from './partials/footer/footer.component';
 import { SidebarComponent } from './partials/sidebar/sidebar.component';
-import { SettingsPanelComponent } from './partials/settings-panel/settings-panel.component';
 import { AttachTokenInterceptor } from './interceptors/attach-token.interceptor';
 import { RequestErrorInterceptor } from './interceptors/request-error.interceptor';
+import { AccountComponent } from './pages/account/account.component';
+import { UsersComponent } from './pages/users/users.component';
+import { UserComponent } from './pages/user/user.component';
+import { TodosComponent } from './pages/todos/todos.component';
+import { TodoComponent } from './pages/todo/todo.component';
+import { UserCreateComponent } from './pages/user-create/user-create.component';
+import { TodoCreateComponent } from './pages/todo-create/todo-create.component';
 
 @NgModule({
     declarations: [
@@ -31,7 +37,13 @@ import { RequestErrorInterceptor } from './interceptors/request-error.intercepto
         NavbarComponent,
         FooterComponent,
         SidebarComponent,
-        SettingsPanelComponent,
+        AccountComponent,
+        UsersComponent,
+        UserComponent,
+        TodosComponent,
+        TodoComponent,
+        UserCreateComponent,
+        TodoCreateComponent,
     ],
     imports: [
         CommonModule,
@@ -39,7 +51,8 @@ import { RequestErrorInterceptor } from './interceptors/request-error.intercepto
         ReactiveFormsModule,
         HttpClientModule,
         BrowserModule,
-        AppRoutingModule
+        AppRoutingModule,
+        NgOptimizedImage
     ],
     providers: [
         {

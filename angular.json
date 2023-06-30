@@ -27,7 +27,7 @@
                         "inlineStyleLanguage": "scss",
                         "assets": [
                             "resources/src/favicon.ico",
-                            "resources/src/app/assets"
+                            "resources/src/assets"
                         ],
                         "styles": [
                             "vendor/bootstrapdash/skydash-free-bootstrap-admin-template/template/vendors/feather/feather.css",
@@ -38,7 +38,12 @@
                             "resources/src/styles.scss"
                         ],
                         "scripts": [
-                            "vendor/bootstrapdash/skydash-free-bootstrap-admin-template/template/vendors/js/vendor.bundle.base.js"
+                            "vendor/bootstrapdash/skydash-free-bootstrap-admin-template/template/vendors/js/vendor.bundle.base.js",
+                            "vendor/bootstrapdash/skydash-free-bootstrap-admin-template/template/js/off-canvas.js",
+                            "vendor/bootstrapdash/skydash-free-bootstrap-admin-template/template/js/hoverable-collapse.js",
+                            "vendor/bootstrapdash/skydash-free-bootstrap-admin-template/template/js/template.js",
+                            "vendor/bootstrapdash/skydash-free-bootstrap-admin-template/template/js/settings.js",
+                            "vendor/bootstrapdash/skydash-free-bootstrap-admin-template/template/js/todolist.js"
                         ]
                     },
                     "configurations": {
