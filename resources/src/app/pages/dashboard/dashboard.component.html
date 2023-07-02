@@ -1,1 +1,81 @@
-<p>dashboard works!</p>
+<div class="main-panel">
+    <div *ngIf="user" class="content-wrapper">
+        <div class="row">
+            <div class="col-md-12 grid-margin">
+                <div class="row">
+                    <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                        <h3 class="font-weight-bold">Welcome {{user.name}}</h3>
+                        <h6 class="font-weight-normal mb-0">All systems are running smoothly! You have <span
+                            class="text-primary">{{(todos.length || 0) | number}} todos!</span></h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 grid-margin transparent">
+                <div class="row">
+                    <div class="col-md-6 mb-4 stretch-card transparent">
+                        <div class="card card-tale">
+                            <div class="card-body">
+                                <p class="mb-4">Today’s Todos</p>
+                                <p class="fs-30 mb-2">{{(todos.length || 0) | number}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4 stretch-card transparent">
+                        <div class="card card-dark-blue">
+                            <div class="card-body">
+                                <p class="mb-4">Total Todos</p>
+                                <p class="fs-30 mb-2">{{(todos.length || 0) | number}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div *ngIf="user?.role === 'administrator'" class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
+                        <div class="card card-light-blue">
+                            <div class="card-body">
+                                <p class="mb-4">Total Users</p>
+                                <p class="fs-30 mb-2">{{users.length | number}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 stretch-card transparent">
+                        <div class="card card-light-danger">
+                            <div class="card-body">
+                                <p class="mb-4">Regular users</p>
+                                <p class="fs-30 mb-2">{{users | arrayFilterByField:'user':['role'] | arrayLength | number}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 grid-margin">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Todos</h4>
+                        <div class="list-wrapper pt-2">
+                            <ul class="d-flex flex-column-reverse todo-list todo-list-custom">
+                                <li *ngFor="let todo of todos" routerLink="/todo/{{todo.id}}">
+                                    <div class="form-check form-check-flat">
+                                        <label class="form-check-label">
+                                            <input [checked]="todo.completed_at" class="checkbox" type="checkbox">
+                                            {{todo.title}}
+                                        </label>
+                                    </div>
+                                    <i (click)="onDeleteTodo($event, todo.id)" class="remove ti-close"></i>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="add-items d-flex mb-0 mt-2">
+                            <a class="btn btn-primary " routerLink="/todo/create">
+                                <i class="icon-plus menu-icon"></i> Add Todo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

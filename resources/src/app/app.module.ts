@@ -22,6 +22,9 @@ import {UsersComponent} from './pages/users/users.component';
 import {UserComponent} from './pages/user/user.component';
 import {TodosComponent} from './pages/todos/todos.component';
 import {TodoComponent} from './pages/todo/todo.component';
+import { ArrayFilterByFieldPipe } from './pipes/array-filter-by-field.pipe';
+import { ArrayLengthPipe } from './pipes/array-length.pipe';
+import { ArrayFilterByPipe } from './pipes/array-filter-by.pipe';
 
 @NgModule({
     declarations: [
@@ -40,6 +43,9 @@ import {TodoComponent} from './pages/todo/todo.component';
         UserComponent,
         TodosComponent,
         TodoComponent,
+        ArrayFilterByFieldPipe,
+        ArrayLengthPipe,
+        ArrayFilterByPipe,
     ],
     imports: [
         CommonModule,
