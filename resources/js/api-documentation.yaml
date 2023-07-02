@@ -171,14 +171,15 @@ paths:
     get:
       tags:
         - Todo
-      summary: Get Todos.
+      summary: Get All Todos.
       description: Get todos associated with the currently logged in account
       security:
         - bearerAuth: [ ]
       parameters:
         - in: query
           name: limit
-          description: The number of todos to return.
+          example: 20
+          description: The number of todos to return, defaults to 20.
           schema:
             type: number
         - in: query
@@ -399,7 +400,8 @@ paths:
       parameters:
         - in: query
           name: limit
-          description: The number of users to return.
+          example: 20
+          description: The number of users to return, defaults to 20.
           schema:
             type: number
         - in: query

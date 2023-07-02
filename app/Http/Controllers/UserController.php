@@ -21,12 +21,29 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        return response()->json([
-            "status" => true,
-            "data" => User::with("todos")->get()
-        ]);
+        try {
+            $request->validate([
+                'limit' => 'numeric',
+                'offset' => 'numeric',
+            ]);
+
+            return response()->json([
+                "status" => true,
+                "data" => User::with("todos")->get()
+                    ->offset($request->offset ?? 0)
+                    ->limit($request->limit ?? 20)
+                    ->get()
+            ]);
+
+
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
     }
 
     /**

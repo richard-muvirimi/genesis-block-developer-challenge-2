@@ -22,11 +22,26 @@ class TodoController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
+        try {
+            $request->validate([
+                'limit' => 'numeric',
+                'offset' => 'numeric',
+            ]);
 
-        return response()->json([
-            "status" => true,
-            "data" => Todo::whereBelongsTo($request->user())->get()
-        ]);
+            return response()->json([
+                "status" => true,
+                "data" => Todo::whereBelongsTo($request->user())
+                    ->offset($request->offset ?? 0)
+                    ->limit($request->limit ?? 20)
+                    ->get()
+            ]);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
     }
 
     /**
