@@ -53,6 +53,22 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Todo"
+    Account:
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+        email_verified_at:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
 paths:
   /login:
     post:
@@ -107,7 +123,7 @@ paths:
                   status:
                     type: boolean
                   data:
-                    $ref: "#/components/schemas/User"
+                    $ref: "#/components/schemas/Account"
   /register:
     post:
       tags:
