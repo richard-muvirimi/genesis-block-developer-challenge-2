@@ -1,1 +1,74 @@
-<p>todos works!</p>
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+
+            <div class="col grid-margin stretch-card">
+                <div class="card">
+                    <div *ngIf="user" class="card-body">
+
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h4 class="card-title">Users</h4>
+                                <p class="card-description">
+                                    {{user.name}},  {{todos.length | number}} todos
+                                </p>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <a class="btn btn-primary " routerLink="/todo/create">
+                                    <i class="icon-plus menu-icon"></i> Add Todo
+                                </a>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <th>Todo</th>
+                                    <th>Due</th>
+                                    <th>Completed</th>
+                                    <th>Created</th>
+                                    <th>Updated</th>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let todo of todos" routerLink="/todo/{{todo.id}}">
+                                    <td class="min-width">{{todo.id}}</td>
+                                    <td>
+                                        <p>{{todo.title | titlecase}}</p>
+                                        <small>{{todo.memo.slice(0, 20)}}</small>
+                                    </td>
+                                    <td>{{todo.remind_at | date}}</td>
+                                    <td>{{todo.completed_at | date}}</td>
+                                    <td>{{todo.created_at |date}}</td>
+                                    <td>{{todo.updated_at |date}}</td>
+                                    <td class="min-width">
+                                        <div class="d-flex" style="gap: 5px">
+                                            <button (click)="onDeleteTodo($event, todo.id)"
+                                                    class="btn btn-danger"
+                                                    type="button">
+                                                <i class="icon-trash menu-icon"></i>
+                                            </button>
+
+                                            <button (click)="onToggleTodo($event, todo)"
+                                                    [title]="todo.completed_at ? 'Mark as incomplete' : 'Mark as complete'"
+                                                    class="btn btn-primary"
+                                                    type="button">
+                                                <i [ngClass]="todo.completed_at ?'icon-circle-check': 'icon-circle-cross' "
+                                                   class="menu-icon"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

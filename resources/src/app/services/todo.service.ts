@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {trimStart} from "lodash";
 import {Observable} from "rxjs";
-import {TodoResponse, TodosResponse} from "../@types/todo";
+import {Todo, TodoResponse, TodosResponse, UpdateTodoData} from "../@types/todo";
 import {HttpClient} from "@angular/common/http";
 import {MessageResponse} from "../@types/misc";
 
@@ -19,6 +19,17 @@ export class TodoService {
         this.deleteTodoById = this.deleteTodoById.bind(this);
     }
 
+    get defaultTodo(): Todo {
+        return {
+            created_at: "", updated_at: "", user_id: 0,
+            id: 0,
+            title: "",
+            memo: "",
+            remind_at: "",
+            completed_at: ""
+        };
+    }
+
     getTodos(): Observable<TodosResponse> {
         return this.http.get<TodosResponse>(this.getApiUrl());
     }
@@ -27,12 +38,7 @@ export class TodoService {
         return this.http.get<TodoResponse>(this.getApiUrl(id.toString()));
     }
 
-    updateTodo(id: number, data: {
-        title: string,
-        memo: string,
-        remind_at: string,
-        completed_at: string
-    }): Observable<MessageResponse> {
+    updateTodo(id: number, data: UpdateTodoData): Observable<MessageResponse> {
 
         const form: FormData = new FormData();
         form.append("title", data.title);
@@ -44,12 +50,7 @@ export class TodoService {
 
     }
 
-    createTodo(data: {
-        title: string,
-        memo: string,
-        remind_at: string,
-        completed_at: string
-    }): Observable<MessageResponse> {
+    createTodo(data: UpdateTodoData): Observable<MessageResponse> {
 
         const form: FormData = new FormData();
         form.append("title", data.title);

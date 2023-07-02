@@ -1,1 +1,50 @@
-<p>todo works!</p>
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+
+            <div class="col grid-margin stretch-card">
+                <div class="card">
+                    <div *ngIf="todo" class="card-body">
+                        <h4 *ngIf="todo.id !== 0" class="card-title">Todo: {{todo.title}}</h4>
+                        <h4 *ngIf="todo.id === 0" class="card-title">Create todo</h4>
+                        <p class="card-description">
+                            Todo details
+                        </p>
+                        <form (ngSubmit)="onSubmit($event)" class="forms-sample">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label" for="todoTitle">Title</label>
+                                <div class="col-sm-9">
+                                    <input [(ngModel)]="todo.title" class="form-control" id="todoTitle"
+                                           name="todoTitle"
+                                           placeholder="Title" required type="text">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label" for="todoMemo">Memo</label>
+                                <div class="col-sm-9">
+                                    <textarea [(ngModel)]="todo.memo" class="form-control" id="todoMemo" name="todoMemo"
+                                              placeholder="Memo" required></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label" for="todoRemindAt">
+                                    Remind At
+                                </label>
+                                <div class="col-sm-9">
+                                    <input [(ngModel)]="todo.remind_at" class="form-control"
+                                           id="todoRemindAt" name="todoRemindAt" placeholder="Remind At"
+                                           type="datetime-local">
+                                </div>
+
+                            </div>
+
+                            <button class="btn btn-primary mr-2" type="submit">Submit</button>
+                            <button class="btn btn-light" routerLink="/todos">Back to Todos</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

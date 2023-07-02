@@ -8,7 +8,7 @@ export interface User {
     email_verified_at: string,
     created_at: string,
     updated_at: string,
-    todo?: Todo[]
+    todos?: Todo[]
 }
 
 export interface UserResponse {
@@ -21,3 +21,20 @@ export interface UsersResponse {
     data: User[]
 }
 
+export interface UpdateUserData {
+    name: string,
+    email: string,
+    role: string,
+    password: string
+}
+
+export interface RegisterUserData {
+    name: string,
+    email: string,
+    password: string
+}
+
+export interface LoginData {
+    email: string,
+    password: string
+}

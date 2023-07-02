@@ -1,1 +1,65 @@
-<p>user works!</p>
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+
+            <div class="col grid-margin stretch-card">
+                <div class="card">
+                    <div *ngIf="user" class="card-body">
+                        <h4 *ngIf="user.id !== 0" class="card-title">User: {{user.name}}</h4>
+                        <h4 *ngIf="user.id === 0" class="card-title">Create User</h4>
+                        <div *ngIf="user.id !== 0" class="d-flex justify-content-between mb-2">
+                            <p class="card-description">
+                                Manages {{user.todos?.length || 0}} todos
+                            </p>
+                            <a class="btn btn-primary " routerLink="/user/{{user.id}}/todo">
+                                <i class="icon-eye menu-icon"></i> User {{user.name}} Todos
+                            </a>
+                        </div>
+                        <form (ngSubmit)="onSubmit($event)" class="forms-sample">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label" for="userFullName">Full Name</label>
+                                <div class="col-sm-9">
+                                    <input [(ngModel)]="user.name" class="form-control" id="userFullName"
+                                           name="userFullName"
+                                           placeholder="Full Name" required type="text">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label" for="userEmail">Email</label>
+                                <div class="col-sm-9">
+                                    <input [(ngModel)]="user.email" class="form-control" id="userEmail" name="userEmail"
+                                           placeholder="Email" required type="email">
+                                </div>
+                            </div>
+                            <div *ngIf="moderator.role === 'administrator'" class="form-group row">
+                                <label class="col-sm-3 col-form-label" for="userRole">Role</label>
+                                <div class="col-sm-9">
+                                    <select [(ngModel)]="user.role" class="form-control form-control-lg"
+                                            id="userRole" name="userRole" required>
+                                        <option value="administrator">Administrator</option>
+                                        <option value="user">User</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label" for="userPassword">
+                                    Password
+                                </label>
+                                <div class="col-sm-9">
+                                    <input [(ngModel)]="password" autocomplete="current-password" class="form-control"
+                                           id="userPassword" name="userPassword" placeholder="Current Password"
+                                           type="password">
+                                    <small>Changes password if it is set.</small>
+                                </div>
+
+                            </div>
+                            <button class="btn btn-primary mr-2" type="submit">Submit</button>
+                            <button class="btn btn-light" routerLink="/users">Back to Users</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

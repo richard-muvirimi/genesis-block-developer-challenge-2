@@ -1,1 +1,61 @@
-<p>users works!</p>
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+
+            <div class="col grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h4 class="card-title">Users</h4>
+                                <p class="card-description">
+                                    {{users.length | number}} system users
+                                </p>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <a class="btn btn-primary " routerLink="/user/create">
+                                    <i class="icon-plus menu-icon"></i> Add User
+                                </a>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <th>User</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Joined</th>
+                                    <th>Todo Count</th>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let user of users" routerLink="/user/{{user.id}}">
+                                    <td class="min-width">{{user.id}}</td>
+                                    <td>{{user.name | titlecase}}</td>
+                                    <td>{{user.email}}</td>
+                                    <td>{{user.role | titlecase}}</td>
+                                    <td>{{user.created_at | date}}</td>
+                                    <td>{{(user.todos?.length || 0) | number}}</td>
+                                    <td class="min-width">
+                                        <button (click)="onDeleteUser($event, user.id)"
+                                                [disabled]="user.id === currentUser.id"
+                                                class="btn btn-danger"
+                                                type="button"><i
+                                            class="icon-trash menu-icon"></i></button>
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

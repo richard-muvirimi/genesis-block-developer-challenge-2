@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {trimStart} from "lodash";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import {UserResponse, UsersResponse} from "../@types/user";
+import {UpdateUserData, UserResponse, UsersResponse} from "../@types/user";
 import {MessageResponse} from "../@types/misc";
 
 @Injectable({
@@ -27,12 +27,7 @@ export class UserService {
         return this.http.get<UserResponse>(this.getApiUrl(id.toString()));
     }
 
-    updateUser(id: number, data: {
-        name: string,
-        email: string,
-        password: string,
-        role: string
-    }): Observable<MessageResponse> {
+    updateUser(id: number, data: UpdateUserData): Observable<MessageResponse> {
 
         const form: FormData = new FormData();
 
@@ -44,12 +39,7 @@ export class UserService {
         return this.http.put<MessageResponse>(this.getApiUrl(id.toString()), form);
     }
 
-    createUser(data: {
-        name: string,
-        email: string,
-        password: string,
-        role: string
-    }): Observable<MessageResponse> {
+    createUser(data: UpdateUserData): Observable<MessageResponse> {
 
         const form: FormData = new FormData();
 

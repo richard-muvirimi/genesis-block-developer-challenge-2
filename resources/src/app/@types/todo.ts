@@ -19,3 +19,9 @@ export interface TodosResponse {
     data: Todo[]
 }
 
+export interface UpdateTodoData {
+    title: string,
+    memo: string,
+    remind_at: string,
+    completed_at: string
+}

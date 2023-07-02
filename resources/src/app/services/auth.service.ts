@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, Subscriber, Subscription} from 'rxjs';
-import {UserResponse} from 'app/@types/user';
+import {LoginData, RegisterUserData, User, UserResponse} from 'app/@types/user';
 import {trimStart} from 'lodash';
-import {AuthResponse} from "../@types/misc";
+import {AuthResponse, MessageResponse} from "../@types/misc";
 
 @Injectable({
     providedIn: 'root'
@@ -34,13 +34,39 @@ export class AuthService {
         return this.hasToken
     }
 
+    get defaultUser(): User {
+        return {
+            id: 0,
+            name: "",
+            email: "",
+            role: "",
+            email_verified_at: "",
+            created_at: "",
+            updated_at: ""
+        };
+    }
+
+    get user(): User {
+        const data: string | null = sessionStorage.getItem("user");
+
+        if (data === null) {
+            return this.defaultUser;
+        }
+
+        return JSON.parse(data);
+    }
+
+    set user(user: User) {
+        sessionStorage.setItem("user", JSON.stringify(user));
+    }
+
     /**
      * Login existing user
      *
      * @param data Object
      * @returns
      */
-    doLogin(data: { email: string, password: string }): Observable<UserResponse> {
+    doLogin(data: LoginData): Observable<UserResponse> {
         return new Observable<UserResponse>((observer: Subscriber<UserResponse>): void => {
 
             const form: FormData = new FormData();
@@ -72,7 +98,7 @@ export class AuthService {
      * @param data Object
      * @returns
      */
-    doRegister(data: { name: string, email: string, password: string }): Observable<UserResponse> {
+    doRegister(data: RegisterUserData): Observable<UserResponse> {
         return new Observable<UserResponse>((observer: Subscriber<UserResponse>): void => {
 
             const form: FormData = new FormData();
@@ -104,13 +130,11 @@ export class AuthService {
      *
      * @returns
      */
-    doLogout(): Observable<{ status: boolean }> {
-        return new Observable<{ status: boolean }>((observer: Subscriber<{ status: boolean }>): void => {
+    doLogout(): Observable<MessageResponse> {
+        return new Observable<MessageResponse>((observer: Subscriber<MessageResponse>): void => {
 
-            const subscription: Subscription = this.http.get<{
-                status: boolean
-            }>(this.getApiUrl("revoke/tokens")).subscribe({
-                next: (res: { status: boolean }): void => {
+            const subscription: Subscription = this.http.get<MessageResponse>(this.getApiUrl("revoke/tokens")).subscribe({
+                next: (res: MessageResponse): void => {
                     observer.next(res);
                 },
                 error: (error: Error): void => {
@@ -129,11 +153,28 @@ export class AuthService {
     }
 
     doGetAccount(): Observable<UserResponse> {
-        return this.http.get<UserResponse>(this.getApiUrl("account"));
+        return new Observable<UserResponse>((observer: Subscriber<UserResponse>): void => {
+
+            const subscription: Subscription = this.http.get<UserResponse>(this.getApiUrl("account")).subscribe({
+                next: (res: UserResponse): void => {
+                    this.user = res.data;
+
+                    observer.next(res);
+                },
+                error: (error: Error): void => {
+                    observer.error(error);
+                },
+                complete: (): void => {
+                    subscription.unsubscribe();
+                    observer.complete();
+                }
+            });
+
+        });
     }
 
     private getApiUrl(path: string = ""): string {
-        const {origin} = location;
+        const {origin}: { origin: string } = location;
 
         return origin + "/api/" + trimStart(path, "/");
     }

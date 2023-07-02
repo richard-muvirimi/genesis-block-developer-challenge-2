@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { User } from 'app/@types/user';
-import { AuthService } from 'app/services/auth.service';
-import { Subscription } from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {User, UserResponse} from 'app/@types/user';
+import {AuthService} from 'app/services/auth.service';
+import {Subscription} from 'rxjs';
+import {MessageResponse} from "../../@types/misc";
 
 @Component({
     selector: 'app-navbar',
@@ -25,7 +26,7 @@ export class NavbarComponent implements OnInit {
 
     ngOnInit(): void {
         const subscription: Subscription = this.authService.doGetAccount().subscribe({
-            next: (res: { status: boolean, data: User }): void => {
+            next: (res: UserResponse): void => {
                 this.user = res.data;
 
                 this.urlEncodedName = encodeURI(this.user.name);
@@ -42,7 +43,7 @@ export class NavbarComponent implements OnInit {
 
     onLogout(event: Event): void {
         const subscription: Subscription = this.authService.doLogout().subscribe({
-            next: (res: { status: boolean }): void => {
+            next: (res: MessageResponse): void => {
 
             },
             error: (error: Error): void => {

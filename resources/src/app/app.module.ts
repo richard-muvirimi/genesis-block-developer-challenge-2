@@ -1,29 +1,27 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { LoginComponent } from './pages/login/login.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { RegisterComponent } from './pages/register/register.component';
-import { LandingComponent } from './pages/landing/landing.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {LoginComponent} from './pages/login/login.component';
+import {DashboardComponent} from './pages/dashboard/dashboard.component';
+import {NotFoundComponent} from './pages/not-found/not-found.component';
+import {RegisterComponent} from './pages/register/register.component';
+import {LandingComponent} from './pages/landing/landing.component';
 import {CommonModule, NgOptimizedImage} from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AdminPanelComponent } from './pages/admin-panel/admin-panel.component';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { NavbarComponent } from './partials/navbar/navbar.component';
-import { FooterComponent } from './partials/footer/footer.component';
-import { SidebarComponent } from './partials/sidebar/sidebar.component';
-import { AttachTokenInterceptor } from './interceptors/attach-token.interceptor';
-import { RequestErrorInterceptor } from './interceptors/request-error.interceptor';
-import { AccountComponent } from './pages/account/account.component';
-import { UsersComponent } from './pages/users/users.component';
-import { UserComponent } from './pages/user/user.component';
-import { TodosComponent } from './pages/todos/todos.component';
-import { TodoComponent } from './pages/todo/todo.component';
-import { UserCreateComponent } from './pages/user-create/user-create.component';
-import { TodoCreateComponent } from './pages/todo-create/todo-create.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AdminPanelComponent} from './pages/admin-panel/admin-panel.component';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {NavbarComponent} from './partials/navbar/navbar.component';
+import {FooterComponent} from './partials/footer/footer.component';
+import {SidebarComponent} from './partials/sidebar/sidebar.component';
+import {AttachTokenInterceptor} from './interceptors/attach-token.interceptor';
+import {RequestErrorInterceptor} from './interceptors/request-error.interceptor';
+import {AccountComponent} from './pages/account/account.component';
+import {UsersComponent} from './pages/users/users.component';
+import {UserComponent} from './pages/user/user.component';
+import {TodosComponent} from './pages/todos/todos.component';
+import {TodoComponent} from './pages/todo/todo.component';
 
 @NgModule({
     declarations: [
@@ -42,8 +40,6 @@ import { TodoCreateComponent } from './pages/todo-create/todo-create.component';
         UserComponent,
         TodosComponent,
         TodoComponent,
-        UserCreateComponent,
-        TodoCreateComponent,
     ],
     imports: [
         CommonModule,
@@ -68,4 +64,5 @@ import { TodoCreateComponent } from './pages/todo-create/todo-create.component';
     ],
     bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

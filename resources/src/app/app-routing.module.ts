@@ -1,19 +1,18 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './pages/login/login.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { IsLoggedGuard, IsLoggedMatch, IsNotLoggedGuard, IsNotLoggedMatch } from './guards/session.guard';
-import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { RegisterComponent } from './pages/register/register.component';
-import { LandingComponent } from './pages/landing/landing.component';
-import { AdminPanelComponent } from './pages/admin-panel/admin-panel.component';
-import { TodosComponent } from './pages/todos/todos.component';
-import { TodoCreateComponent } from './pages/todo-create/todo-create.component';
-import { TodoComponent } from './pages/todo/todo.component';
-import { UsersComponent } from './pages/users/users.component';
-import { UserCreateComponent } from './pages/user-create/user-create.component';
-import { UserComponent } from './pages/user/user.component';
-import { AccountComponent } from './pages/account/account.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {LoginComponent} from './pages/login/login.component';
+import {DashboardComponent} from './pages/dashboard/dashboard.component';
+import {IsLoggedGuard, IsLoggedMatch, IsNotLoggedGuard, IsNotLoggedMatch} from './guards/session.guard';
+import {NotFoundComponent} from './pages/not-found/not-found.component';
+import {RegisterComponent} from './pages/register/register.component';
+import {LandingComponent} from './pages/landing/landing.component';
+import {AdminPanelComponent} from './pages/admin-panel/admin-panel.component';
+import {TodosComponent} from './pages/todos/todos.component';
+import {TodoComponent} from './pages/todo/todo.component';
+import {UsersComponent} from './pages/users/users.component';
+import {UserComponent} from './pages/user/user.component';
+import {AccountComponent} from './pages/account/account.component';
+import {IsRoleAdminGuard, IsRoleAdminMatch} from "./guards/role.guard";
 
 const routes: Routes = [
     {
@@ -61,9 +60,16 @@ const routes: Routes = [
                 component: TodosComponent
             },
             {
+                path: "user/:id/todo",
+                title: "User",
+                canMatch: [IsRoleAdminMatch],
+                canActivate: [IsRoleAdminGuard],
+                component: TodosComponent
+            },
+            {
                 path: "todos/create",
                 title: "create Todo",
-                component: TodoCreateComponent
+                component: TodoComponent
             },
             {
                 path: "todo/:id",
@@ -73,18 +79,25 @@ const routes: Routes = [
             {
                 path: "users",
                 title: "Users",
+                canMatch: [IsRoleAdminMatch],
+                canActivate: [IsRoleAdminGuard],
                 component: UsersComponent
             },
             {
                 path: "users/create",
                 title: "Create User",
-                component: UserCreateComponent
+                canMatch: [IsRoleAdminMatch],
+                canActivate: [IsRoleAdminGuard],
+                component: UserComponent
             },
             {
                 path: "user/:id",
                 title: "User",
+                canMatch: [IsRoleAdminMatch],
+                canActivate: [IsRoleAdminGuard],
                 component: UserComponent
             },
+
             {
                 path: "account",
                 title: "Account",
@@ -108,4 +121,5 @@ const routes: Routes = [
     imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

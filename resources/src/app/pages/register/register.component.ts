@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { User } from 'app/@types/user';
-import { AuthService } from 'app/services/auth.service';
-import { Subscription } from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {UserResponse} from 'app/@types/user';
+import {AuthService} from 'app/services/auth.service';
+import {Subscription} from 'rxjs';
 
 @Component({
     selector: 'app-register',
@@ -38,8 +38,7 @@ export class RegisterComponent implements OnInit {
 
     onRegister(event: Event): void {
         const subscription: Subscription = this.authService.doRegister(this.user).subscribe({
-            next: (res: { status: boolean, data: User }): void => {
-
+            next: (res: UserResponse): void => {
                 this.router.navigate(['/dashboard']);
             },
             error: (error: Error): void => {
