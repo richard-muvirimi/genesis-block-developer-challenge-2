@@ -3,7 +3,6 @@
 namespace App\Policies;
 
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class UserPolicy
 {
@@ -28,7 +27,7 @@ class UserPolicy
      */
     public function create(User $user): bool
     {
-        return $user->tokenCan("create:account") || $user->tokenCan("create:others:account");
+        return true; // Anyone can create a user
     }
 
     /**

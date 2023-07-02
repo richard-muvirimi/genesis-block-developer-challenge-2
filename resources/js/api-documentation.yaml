@@ -68,8 +68,10 @@ paths:
               type: object
               properties:
                 email:
+                  description: The email of the user trying to login.
                   type: string
                 password:
+                  description: The password of the user trying to login.
                   type: string
               required:
                 - email
@@ -93,7 +95,7 @@ paths:
       summary: Get Account Details.
       description: Get currently logged in account details.
       security:
-        - bearerAuth: []
+        - bearerAuth: [ ]
       responses:
         "200":
           description: An object with the request status and the user object
@@ -120,10 +122,13 @@ paths:
               type: object
               properties:
                 name:
+                  description: The new full name of the user
                   type: string
                 email:
+                  description: The new email for the user
                   type: string
                 password:
+                  description: Required if editing own account, else needs admin role
                   type: string
               required:
                 - name
@@ -150,7 +155,7 @@ paths:
       summary: Revokes authentication tokens.
       description: Revokes all auntentication tokens associated with the login account.
       security:
-        - bearerAuth: []
+        - bearerAuth: [ ]
       responses:
         "200":
           description: An object with the request status
@@ -169,7 +174,18 @@ paths:
       summary: Get Todos.
       description: Get todos associated with the currently logged in account
       security:
-        - bearerAuth: []
+        - bearerAuth: [ ]
+      parameters:
+        - in: query
+          name: limit
+          description: The number of todos to return.
+          schema:
+            type: number
+        - in: query
+          name: offset
+          description: The offset to start returning todos.
+          schema:
+            type: number
       responses:
         "200":
           description: An object with the request status and the list of todos
@@ -190,7 +206,7 @@ paths:
       summary: Create a new todo.
       description: Create a new todo for the logged in user.
       security:
-        - bearerAuth: []
+        - bearerAuth: [ ]
       requestBody:
         required: true
         content:
@@ -199,12 +215,16 @@ paths:
               type: object
               properties:
                 title:
+                  description: The title of the Todo being created.
                   type: string
                 memo:
+                  description: The memo of the Todo being created
                   type: string
                 remind_at:
+                  description: The date to remind of the Todo.
                   type: string
                 completed_at:
+                  description: The date the Todo was completed.
                   type: string
               required:
                 - title
@@ -227,11 +247,11 @@ paths:
       summary: Get a single todo.
       description: Get a single todo with matching id.
       security:
-        - bearerAuth: []
+        - bearerAuth: [ ]
       parameters:
         - in: path
           name: todo
-          description: Todo ID.
+          description: The Todo ID of the todo to get.
           required: true
           schema:
             type: string
@@ -253,11 +273,11 @@ paths:
       summary: Update a Todo Item.
       description: Update an existing todo item.
       security:
-        - bearerAuth: []
+        - bearerAuth: [ ]
       parameters:
         - in: path
           name: todo
-          description: Todo ID.
+          description: The Todo ID of the Todo to update.
           required: true
           schema:
             type: string
@@ -269,12 +289,16 @@ paths:
               type: object
               properties:
                 title:
+                  description: The new title of the Todo.
                   type: string
                 memo:
+                  description: The new memo of the Todo
                   type: string
                 remind_at:
+                  description: The date to remind of the Todo.
                   type: string
                 completed_at:
+                  description: The date the Todo was completed.
                   type: string
               required:
                 - title
@@ -296,11 +320,11 @@ paths:
       summary: Update a Todo Item.
       description: Update an existing todo item.
       security:
-        - bearerAuth: []
+        - bearerAuth: [ ]
       parameters:
         - in: path
           name: todo
-          description: Todo ID.
+          description: The Todo ID of the Todo to update.
           required: true
           schema:
             type: string
@@ -312,12 +336,16 @@ paths:
               type: object
               properties:
                 title:
+                  description: The new title of the Todo.
                   type: string
                 memo:
+                  description: The new memo of the Todo
                   type: string
                 remind_at:
+                  description: The date to remind of the Todo.
                   type: string
                 completed_at:
+                  description: The date the Todo was completed.
                   type: string
               required:
                 - title
@@ -339,11 +367,11 @@ paths:
       summary: Deletes Todo Item.
       description: Deletes a single Todo Item.
       security:
-        - bearerAuth: []
+        - bearerAuth: [ ]
       parameters:
         - in: path
           name: todo
-          description: Todo ID.
+          description: The Todo ID of the Todo to delete.
           required: true
           schema:
             type: string
@@ -367,7 +395,18 @@ paths:
       summary: Get All Users.
       description: Get all users, requires admin role
       security:
-        - bearerAuth: []
+        - bearerAuth: [ ]
+      parameters:
+        - in: query
+          name: limit
+          description: The number of users to return.
+          schema:
+            type: number
+        - in: query
+          name: offset
+          description: The offset to start returning users.
+          schema:
+            type: number
       responses:
         "200":
           description: An object with the request status and the list of users
@@ -388,7 +427,7 @@ paths:
       summary: Create a new user.
       description: Create a new user for the logged in user.
       security:
-        - bearerAuth: []
+        - bearerAuth: [ ]
       requestBody:
         required: true
         content:
@@ -397,12 +436,16 @@ paths:
               type: object
               properties:
                 name:
+                  description: The name of the user being created
                   type: string
                 email:
+                  description: The email of the user being created
                   type: string
                 password:
+                  description: The password of the user being created
                   type: string
                 role:
+                  description: The role of the user being created
                   type: string
               required:
                 - title
@@ -429,11 +472,11 @@ paths:
       summary: Get a single user.
       description: Get a single user with matching id.
       security:
-        - bearerAuth: []
+        - bearerAuth: [ ]
       parameters:
         - in: path
           name: user
-          description: User ID.
+          description: The User ID of the user to get.
           required: true
           schema:
             type: string
@@ -455,11 +498,11 @@ paths:
       summary: Update a User Item.
       description: Update an existing user item.
       security:
-        - bearerAuth: []
+        - bearerAuth: [ ]
       parameters:
         - in: path
           name: user
-          description: User ID.
+          description: The User ID of the user to update.
           required: true
           schema:
             type: string
@@ -471,17 +514,20 @@ paths:
               type: object
               properties:
                 name:
+                  description: The new full name of the user
                   type: string
                 email:
+                  description: The new email for the user
                   type: string
                 password:
+                  description: Required if editing own account, else needs admin role
                   type: string
                 role:
+                  description: Only honoured if admin account editing
                   type: string
               required:
                 - title
                 - email
-                - password
       responses:
         "200":
           description: An object with the request status
@@ -500,11 +546,11 @@ paths:
       summary: Update a User Item.
       description: Update an existing user item.
       security:
-        - bearerAuth: []
+        - bearerAuth: [ ]
       parameters:
         - in: path
           name: user
-          description: User ID.
+          description: The User ID od the user to update.
           required: true
           schema:
             type: string
@@ -516,17 +562,20 @@ paths:
               type: object
               properties:
                 name:
+                  description: The new full name of the user
                   type: string
                 email:
+                  description: The new email for the user
                   type: string
                 password:
+                  description: Required if editing own account, else needs admin role
                   type: string
                 role:
+                  description: Only honoured if admin account editing
                   type: string
               required:
                 - title
                 - email
-                - password
       responses:
         "200":
           description: An object with the request status
@@ -545,11 +594,11 @@ paths:
       summary: Deletes User Item.
       description: Deletes a single User Item.
       security:
-        - bearerAuth: []
+        - bearerAuth: [ ]
       parameters:
         - in: path
           name: user
-          description: User ID.
+          description: The User ID od the User to delete.
           required: true
           schema:
             type: string

@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Todo;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class TodoController extends Controller
 {
-  /**
+    /**
      * Create the controller instance.
      */
     public function __construct()
@@ -19,7 +20,7 @@ class TodoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(Request $request): JsonResponse
     {
 
         return response()->json([
@@ -31,7 +32,7 @@ class TodoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         try {
             $request->validate([
@@ -61,7 +62,7 @@ class TodoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Todo $todo)
+    public function show(Todo $todo): JsonResponse
     {
 
         return response()->json([
@@ -73,7 +74,7 @@ class TodoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Todo $todo)
+    public function update(Request $request, Todo $todo): JsonResponse
     {
         try {
             $request->validate([
@@ -105,7 +106,7 @@ class TodoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Todo $todo)
+    public function destroy(Todo $todo): JsonResponse
     {
 
         $todo->delete();

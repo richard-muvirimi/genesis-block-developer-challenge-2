@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Http\Request;
 use App\Models\User;
 use Exception;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
-use LasseRafn\InitialAvatarGenerator\InitialAvatar;
 
 class Controller extends BaseController
 {
     use AuthorizesRequests;
     use ValidatesRequests;
 
-    public function login(Request $request)
+    public function login(Request $request): JsonResponse
     {
         try {
             $request->validate([
@@ -27,7 +27,7 @@ class Controller extends BaseController
 
             $user = User::where('email', $request->email)->first();
 
-            if (! $user || ! Hash::check($request->password, $user->password)) {
+            if (!$user || !Hash::check($request->password, $user->password)) {
                 throw ValidationException::withMessages([
                     'email' => ['The provided credentials are incorrect.'],
                 ]);
@@ -37,8 +37,8 @@ class Controller extends BaseController
 
             return response()->json(
                 [
-                'status' => true,
-                "data" => $user->createToken("token", $permissions)->plainTextToken
+                    'status' => true,
+                    "data" => $user->createToken("token", $permissions)->plainTextToken
                 ],
                 200
             );
@@ -50,7 +50,7 @@ class Controller extends BaseController
         }
     }
 
-    private function getPermissions(User $user)
+    private function getPermissions(User $user): array
     {
         $permissions = [
             "view:todo",

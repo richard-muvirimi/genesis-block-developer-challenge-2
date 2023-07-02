@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Todo;
 use App\Models\User;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-  /**
+    /**
      * Create the controller instance.
      */
     public function __construct()
@@ -21,18 +21,18 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): JsonResponse
     {
         return response()->json([
             "status" => true,
-            "data" => User::all()
+            "data" => User::with("todos")->get()
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         try {
             $request->validate([
@@ -64,36 +64,38 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show(User $user): JsonResponse
     {
-
-        $user->todo = Todo::whereBelongsTo($user)->get();
 
         return response()->json([
             "status" => true,
-            "data" => $user
+            "data" => $user->load("todos")
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $user): JsonResponse
     {
         try {
+
             $request->validate([
                 'name' => 'required',
                 'email' => 'required|email',
-                'password' => 'required',
+                'password' => '',
                 "role" => ""
             ]);
 
             $user->name = $request->name;
             $user->email = $request->email;
-            $user->password = Hash::make($request->password);
 
             if ($request->user()->tokenCan("update:others:account")) {
                 $user->role = $request->role;
+            }
+
+            if ($request->password) {
+                $user->password = Hash::make($request->password);
             }
 
             $user->save();
@@ -113,7 +115,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(User $user): JsonResponse
     {
 
         $user->delete();

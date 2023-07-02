@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Storage;
 
 class Viewify extends Command
 {
@@ -24,7 +23,7 @@ class Viewify extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         @copy(public_path('build/index.blade.php'), resource_path('views/index.blade.php'));
     }
