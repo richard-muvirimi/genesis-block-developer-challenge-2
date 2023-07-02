@@ -49,7 +49,7 @@ components:
           type: string
         updated_at:
           type: string
-        todo:
+        todos:
           type: array
           items:
             $ref: "#/components/schemas/Todo"
