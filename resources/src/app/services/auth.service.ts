@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, Subscriber, Subscription} from 'rxjs';
 import {LoginData, RegisterUserData, User, UserResponse} from 'app/@types/user';
-import {trimStart} from 'lodash';
 import {AuthResponse, MessageResponse} from "../@types/misc";
+import {ApiUtil} from "../utils/api.util";
 
 @Injectable({
     providedIn: 'root'
@@ -174,8 +174,6 @@ export class AuthService {
     }
 
     private getApiUrl(path: string = ""): string {
-        const {origin}: { origin: string } = location;
-
-        return origin + "/api/" + trimStart(path, "/");
+        return ApiUtil.getApiUrl(path, "");
     }
 }

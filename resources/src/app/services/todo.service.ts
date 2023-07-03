@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {trimStart} from "lodash";
 import {Observable} from "rxjs";
 import {Todo, TodoResponse, TodosResponse, UpdateTodoData} from "../@types/todo";
 import {HttpClient} from "@angular/common/http";
 import {MessageResponse} from "../@types/misc";
+import {ApiUtil} from "../utils/api.util";
 
 @Injectable({
     providedIn: 'root'
@@ -66,8 +66,6 @@ export class TodoService {
     }
 
     private getApiUrl(path: string = ""): string {
-        const {origin} = location;
-
-        return origin + "/api/todo/" + trimStart(path, "/");
+        return ApiUtil.getApiUrl("todo", path);
     }
 }

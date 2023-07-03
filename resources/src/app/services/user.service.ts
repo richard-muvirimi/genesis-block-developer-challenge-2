@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {trimStart} from "lodash";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {UpdateUserData, UserResponse, UsersResponse} from "../@types/user";
 import {MessageResponse} from "../@types/misc";
+import {ApiUtil} from "../utils/api.util";
 
 @Injectable({
     providedIn: 'root'
@@ -56,8 +56,6 @@ export class UserService {
     }
 
     private getApiUrl(path: string = ""): string {
-        const {origin} = location;
-
-        return origin + "/api/user/" + trimStart(path, "/");
+        return ApiUtil.getApiUrl("user", path);
     }
 }

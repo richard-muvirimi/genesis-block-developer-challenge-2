@@ -23,7 +23,7 @@
                 </ul>
             </div>
         </li>
-        <li class="nav-item">
+        <li *ngIf="user &&  user.role === 'administrator'" class="nav-item">
             <a aria-controls="users" aria-expanded="false" class="nav-link" data-toggle="collapse" href="#users">
                 <i class="icon-circle-plus menu-icon"></i>
                 <span class="menu-title">Users</span>
