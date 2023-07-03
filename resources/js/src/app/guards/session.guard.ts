@@ -1,6 +1,6 @@
-import { inject } from '@angular/core';
-import { ActivatedRouteSnapshot, Route, Router, RouterStateSnapshot, UrlSegment } from '@angular/router';
-import { AuthService } from 'app/services/auth.service';
+import {inject} from '@angular/core';
+import {ActivatedRouteSnapshot, Route, Router, RouterStateSnapshot, UrlSegment} from '@angular/router';
+import {AuthService} from '../services/auth.service';
 
 export function IsLoggedGuard(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> | boolean {
     const auth: AuthService = inject(AuthService);

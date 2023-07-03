@@ -18,16 +18,16 @@
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
                         "outputPath": "public/build",
-                        "index": "resources/src/index.blade.php",
-                        "main": "resources/src/main.ts",
+                        "index": "resources/js/src/index.blade.php",
+                        "main": "resources/js/src/main.ts",
                         "polyfills": [
                             "zone.js"
                         ],
-                        "tsConfig": "resources/src/tsconfig.app.json",
+                        "tsConfig": "tsconfig.app.json",
                         "inlineStyleLanguage": "scss",
                         "assets": [
-                            "resources/src/favicon.ico",
-                            "resources/src/assets"
+                            "resources/js/src/favicon.ico",
+                            "resources/js/src/assets"
                         ],
                         "styles": [
                             "vendor/bootstrapdash/skydash-free-bootstrap-admin-template/template/vendors/feather/feather.css",
@@ -35,7 +35,7 @@
                             "vendor/bootstrapdash/skydash-free-bootstrap-admin-template/template/vendors/css/vendor.bundle.base.css",
                             "vendor/bootstrapdash/skydash-free-bootstrap-admin-template/template/css/vertical-layout-light/style.css",
                             "vendor/bootstrapdash/skydash-free-bootstrap-admin-template/template/vendors/mdi/css/materialdesignicons.min.css",
-                            "resources/src/styles.scss"
+                            "resources/js/src/styles.scss"
                         ],
                         "scripts": [
                             "vendor/bootstrapdash/skydash-free-bootstrap-admin-template/template/vendors/js/vendor.bundle.base.js",
@@ -103,11 +103,11 @@
                         "tsConfig": "resources/src/tsconfig.spec.json",
                         "inlineStyleLanguage": "scss",
                         "assets": [
-                            "resources/src/favicon.ico",
-                            "resources/src/assets"
+                            "resources/js/src/favicon.ico",
+                            "resources/js/src/assets"
                         ],
                         "styles": [
-                            "resources/src/styles.scss"
+                            "resources/js/src/styles.scss"
                         ],
                         "scripts": []
                     }

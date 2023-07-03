@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, Subscriber, Subscription} from 'rxjs';
-import {LoginData, RegisterUserData, User, UserResponse} from 'app/@types/user';
+import {LoginData, RegisterUserData, User, UserResponse} from '../@types/user';
 import {AuthResponse, MessageResponse} from "../@types/misc";
 import {ApiUtil} from "../utils/api.util";
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>{{ config('app.name') }}</title>
-    <base href="{{ rtrim(config('app.url'), "/") . "/" }}">
+    <base href="{{ rtrim(config('app.url'), '/') . '/' }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="/src/favicon.ico">
 </head>
