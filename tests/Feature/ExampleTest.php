@@ -16,4 +16,20 @@ class ExampleTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    public function test_that_index_file_exists(): void
+    {
+        $this->assertFileExists('resources/views/index.blade.php');
+    }
+
+    public function test_that_documentation_exists(): void
+    {
+        $this->assertFileExists('resources/views/documentation.blade.php');
+    }
+
+    public function test_that_app_url_is_set(): void
+    {
+        $this->assertNotEmpty(env('APP_URL'));
+    }
+    
 }
