@@ -36,8 +36,6 @@ class UserController extends Controller
                     ->limit($request->limit ?? 20)
                     ->get()
             ]);
-
-
         } catch (Exception $e) {
             return response()->json([
                 'status' => false,
@@ -96,7 +94,6 @@ class UserController extends Controller
     public function update(Request $request, User $user): JsonResponse
     {
         try {
-
             $request->validate([
                 'name' => 'required',
                 'email' => 'required|email',

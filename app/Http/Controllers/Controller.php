@@ -64,7 +64,9 @@ class Controller extends BaseController
         ];
 
         if ($user->role === "administrator") {
-            $permissions = array_merge($permissions, array_map(fn($perm) => str_replace(":", ":others:", $perm), $permissions));
+            $permissions = array_merge($permissions, array_map(function ($perm) {
+                return str_replace(":", ":others:", $perm);
+            }, $permissions));
         }
 
         return $permissions;

@@ -35,7 +35,6 @@ class TodoController extends Controller
                     ->limit($request->limit ?? 20)
                     ->get()
             ]);
-
         } catch (Exception $e) {
             return response()->json([
                 'status' => false,
